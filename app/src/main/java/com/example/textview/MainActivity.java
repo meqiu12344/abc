@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button more = findViewById(R.id.more);
+        Button less = findViewById(R.id.less);
+
         ArrayList<TextView> textViewlist = new ArrayList<TextView>();
         ConstraintLayout layout = findViewById(R.id.layout_id);
 
@@ -28,8 +30,21 @@ public class MainActivity extends AppCompatActivity {
                 for( int i = 0; i < layout.getChildCount(); i++ ) {
 
                     if (layout.getChildAt(i) instanceof TextView) {
-                        int sizeText = ((TextView) layout.getChildAt(i)).getTextSizeUnit();
-                        ((TextView) layout.getChildAt(i)).setTextSize(sizeText + 1);
+                        float sizeText = ((TextView) layout.getChildAt(i)).getTextSize();
+                        ((TextView) layout.getChildAt(i)).setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeText + 1);
+                    }
+                }
+            }
+        });
+
+        less.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for( int i = 0; i < layout.getChildCount(); i++ ) {
+
+                    if (layout.getChildAt(i) instanceof TextView) {
+                        float sizeText = ((TextView) layout.getChildAt(i)).getTextSize();
+                        ((TextView) layout.getChildAt(i)).setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeText - 1);
                     }
                 }
             }
