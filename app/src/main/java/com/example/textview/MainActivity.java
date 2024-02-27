@@ -3,6 +3,7 @@ package com.example.textview;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.View;
@@ -20,18 +21,17 @@ public class MainActivity extends AppCompatActivity {
 
         Button more = findViewById(R.id.more);
         Button less = findViewById(R.id.less);
-
-        ArrayList<TextView> textViewlist = new ArrayList<TextView>();
         ConstraintLayout layout = findViewById(R.id.layout_id);
 
         more.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for( int i = 0; i < layout.getChildCount(); i++ ) {
+                for( int i = 0; i < layout.getChildCount()-2; i++ ) {
 
                     if (layout.getChildAt(i) instanceof TextView) {
                         float sizeText = ((TextView) layout.getChildAt(i)).getTextSize();
-                        ((TextView) layout.getChildAt(i)).setTextSize(TypedValue.COMPLEX_UNIT_PX, sizeText + 1);
+                        sizeText = sizeText/(Resources.getSystem().getDisplayMetrics().density);
+                        ((TextView) layout.getChildAt(i)).setTextSize(sizeText + 1);
                     }
                 }
             }
